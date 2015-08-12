@@ -1,0 +1,31 @@
+﻿@model EDocument.Models.ShapeViewModel
+@section scripts
+{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/Draw.js")"></script>
+    <script type="text/javascript">
+        var isValid = @Html.Raw(Json.Encode(ViewData.ModelState.IsValid));
+    </script>
+}
+@using (Html.BeginForm("Save", "Home"))
+{
+    <div class="form-group has-success">
+        @Html.LabelFor(model => model.Shape.ShapeTypeId, "Shape", new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.Shape.ShapeTypeId, Model.Shapes, new { @class = "form-control" })
+    </div>
+    <div class="form-group has-success">
+        @Html.LabelFor(model => model.Shape.Height, "Height", new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Shape.Height, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Shape.Height)
+    </div>
+    <div class="form-group has-success">
+        @Html.LabelFor(model => model.Shape.Label, "Label", new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Shape.Label, new { @class = "form-control" })
+    </div>
+    <div class="form-group has-success">
+        @Html.LabelFor(model => model.Shape.LabelRow, "Label Row", new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.Shape.LabelRow, new { @class = "form-control" })
+    </div>
+    <input type="submit" value="Draw" class="btn btn-default" />
+}
+<hr />
+<div id="shape"></div>
